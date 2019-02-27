@@ -10,11 +10,11 @@ print(array)
 
 num_dict = dict()
 
-for i in range(len(array)):
-    if array[i] in num_dict.keys():
-        num_dict[array[i]] += 1
+for item in array:
+    if item in num_dict.keys():
+        num_dict[item] += 1
     else:
-        num_dict[array[i]] = 1
+        num_dict[item] = 1
 
 m_val = 0
 m_num = 0
@@ -24,5 +24,5 @@ for num, value in num_dict.items():
         m_val = value
         m_num = num
 
-# print(num_dict)
+#print(num_dict)
 print(f"Чаще всего встречается число: {m_num}")
