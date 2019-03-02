@@ -9,13 +9,6 @@ import random
 import collections
 import cProfile
 
-# SIZE = 10000000
-# MIN_LIMIT = 0
-# MAX_LIMIT = 10000
-# array = [random.randint(MIN_LIMIT, MAX_LIMIT) for _ in range(SIZE)]
-# print(array)
-
-
 def create_array(size, max_num_value):
     min_limit = 0
     max_limit = max_num_value
@@ -67,7 +60,7 @@ def find_freq_num_2(ar):
     print(f"Чаще всего встречается число: {m_num}")
 
 
-# Для подсчёта частоты вхождения используется массив с размерностью MAX_LIMIT
+# Для подсчёта частоты вхождения используется массив с размерностью max_num_value
 def find_freq_num_3(ar, max_num_value):
 
     freq_ar = [0] * (max_num_value + 1)
@@ -118,7 +111,6 @@ def start_n(func_num, size, max_num_value):
 
 # cProfile.run("start_all(10000000,10000)")
 
-
 # cProfile tests
 #################################################################################
 # test 1
@@ -151,4 +143,35 @@ def start_n(func_num, size, max_num_value):
 
 # timeit
 #################################################################################
+# Test find_freq_num_1
+# python.exe -m timeit -n 100 -s "import task_41" "task_41.start_n(1, 1000, 10)"
+# 100 loops, best of 5: 12.2 msec per loop
+# python.exe -m timeit -n 100 -s "import task_41" "task_41.start_n(1, 10000, 1000)"
+# 100 loops, best of 5: 109 msec per loop
 
+# Test find_freq_num_2
+# python.exe -m timeit -n 100 -s "import task_41" "task_41.start_n(2, 1000, 10)"
+# 100 loops, best of 5: 12.3 msec per loop
+# python.exe -m timeit -n 100 -s "import task_41" "task_41.start_n(2, 10000, 1000)"
+# 100 loops, best of 5: 104 msec per loop
+
+# Test find_freq_num_3
+# python.exe -m timeit -n 100 -s "import task_41" "task_41.start_n(3, 1000, 10)"
+# 100 loops, best of 5: 14.5 msec per loop
+# python.exe -m timeit -n 100 -s "import task_41" "task_41.start_n(3, 10000, 1000)"
+# 100 loops, best of 5: 95 msec per loop
+
+# Test find_freq_num_4
+# python.exe -m timeit -n 100 -s "import task_41" "task_41.start_n(4, 1000, 10)"
+# 100 loops, best of 5: 16.2 msec per loop
+# python.exe -m timeit -n 100 -s "import task_41" "task_41.start_n(4, 10000, 1000)"
+# 100 loops, best of 5: 101 msec per loop
+
+# Вывод
+#################################################################################
+# Вариант 1 самый медленный, за счет постояннонго поиска элементов в словаре.
+# В варианте 2 был устранён недостаток варианта 2, что привело к резкому росту производительности.
+# В варианте 3 использование массива позволило избавиться от операций поиска элементов, что еще увеличило скорость,
+# но за счет увеличения потребления памяти (большая часть которой может и не использоваться при большом max_num_value).
+# Вариант 3 в одном из тестов даже обогнал реализацию на функциях стандартной библиотеки (Вариант 4).
+# Вариант 4 почти всегда выигрывает по производительности, за счет того, что библиотеки написаны на С
